@@ -46,7 +46,7 @@ print(test2('javad','darvishi'));
 }
 
 //declare the function with name parameter
-String test({ required String  name,required String  falmily}){
+String test({required String  name, String?  falmily}){
   print(name);
   return 'reza';
 }
