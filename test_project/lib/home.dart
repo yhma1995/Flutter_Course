@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/auth/login.dart';
 import 'package:test_project/calculator/calculator.dart';
 import 'package:test_project/statefull/test.dart';
 
@@ -34,7 +35,15 @@ class HomeWidget extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder:(context) => TestWidget(),));
               },
               child: Icon(Icons.transfer_within_a_station,size: 70,color: Colors.blueGrey,)),
-        )
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder:(context) => LoginWidget(),));
+              },
+              child: Icon(Icons.login,size: 70,color: Colors.blueGrey,)),
+        ),
       ],),
     );
   }
