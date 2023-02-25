@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatefulWidget {
+  int a=0;
   LoginWidget({Key? key}) : super(key: key);
 
   @override
@@ -10,6 +11,7 @@ class LoginWidget extends StatefulWidget {
 class _LoginWidgetState extends State<LoginWidget> {
   bool userNameValid = false;
   String username='';
+  //widget.a;
 
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test_project/auth/login.dart';
 import 'package:test_project/calculator/calculator.dart';
 import 'package:test_project/statefull/test.dart';
+import 'package:test_project/test_http/test_http.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -43,6 +44,15 @@ class HomeWidget extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder:(context) => LoginWidget(),));
               },
               child: Icon(Icons.login,size: 70,color: Colors.blueGrey,)),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder:(context) => HttpWidget(),));
+              },
+              child: Icon(Icons.signal_wifi_statusbar_connected_no_internet_4
+                ,size: 70,color: Colors.blueGrey,)),
         ),
       ],),
     );
