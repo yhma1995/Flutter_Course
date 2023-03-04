@@ -6,4 +6,7 @@ class Routing {
       return widget;
     },));
   }
+  static void back(BuildContext context){
+    Navigator.pop(context);
+  }
 }
