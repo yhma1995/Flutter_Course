@@ -4,7 +4,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:test_project/core/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:test_project/core/routing.dart';
 import 'package:test_project/core/text_theme.dart';
+import 'package:test_project/product/details.dart';
 
 
 class ProductPage extends StatefulWidget {
@@ -16,7 +18,19 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   List products=[];
-  void getProducts()async{
+
+
+  @override
+  void initState() {
+    super.initState();
+    getProducts().then((value) {
+      setState(() {
+
+      });
+    });
+  }
+
+  Future<void> getProducts()async{
     Map<String, String> header={
       'lang':'en'
     };
@@ -33,9 +47,6 @@ class _ProductPageState extends State<ProductPage> {
     http.Response res=await http.get(url,headers: header);
     Map response=jsonDecode(res.body);
     products=response['result'];
-    setState(() {
-
-    });
   }
 
 
@@ -51,65 +62,63 @@ class _ProductPageState extends State<ProductPage> {
           child: ListView.builder(
             itemCount: products.length,
             itemBuilder: (context, index) {
-            return Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.all(8),
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                 borderRadius: BorderRadius.circular(10),
-                 border: Border.all(color: Colors.grey,width: 1)
-                ),
-                child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+            return GestureDetector(
+              onTap: () => Routing.push(context,ProductDetails(products[index]['id'])),
+              child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                   borderRadius: BorderRadius.circular(10),
+                   border: Border.all(color: Colors.grey,width: 1)
+                  ),
+                  child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
 
-                 Stack(
-                   children: [
-                     /*
-                   Image.network(base_download_image+'product/'+products[index]['product_attribute']['product_info']['images'][0]['imageName'],
-                       width: MediaQuery.of(context).size.width,height: 200,fit: BoxFit.cover,),
+                   Stack(
+                     children: [
+                       /*
+                     Image.network(base_download_image+'product/'+products[index]['product_attribute']['product_info']['images'][0]['imageName'],
+                         width: MediaQuery.of(context).size.width,height: 200,fit: BoxFit.cover,),
 
-                      */
+                        */
 
-                     CachedNetworkImage(
-                       imageUrl: base_download_image+'product/'+products[index]['product_attribute']['product_info']['images'][0]['imageName'],
-                     ),
-                     if(products[index]['discount']!=null)
-                       Align(
-                         alignment:Alignment.topRight,
-                         child: CircleAvatar(
-                           backgroundColor: Colors.white,
-                           radius: 23,
-                           child: Center(
-                             child: Text('%'+products[index]['discount'].toString()
-                                 ,style: CustomTextStyle.header.copyWith(color:Colors.red)),
+                       CachedNetworkImage(
+                         fit: BoxFit.fill,
+                         imageUrl: base_download_image+'product/'+products[index]['product_attribute']['product_info']['images'][0]['imageName'],
+                       ),
+                       if(products[index]['discount']!=null)
+                         Align(
+                           alignment:Alignment.topRight,
+                           child: CircleAvatar(
+                             backgroundColor: Colors.white,
+                             radius: 23,
+                             child: Center(
+                               child: Text('%'+products[index]['discount'].toString()
+                                   ,style: CustomTextStyle.header.copyWith(color:Colors.red)),
+                             ),
                            ),
                          ),
-                       ),
-                   ],
-                 ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(products[index]['product_attribute']['product_info']['name']
-                          ,style: CustomTextStyle.header),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(products[index]['product_attribute']['product_info']['description']
-                          ,style: CustomTextStyle.subtitle),
-                    ),
-                    Text(products[index]['price'].toString()
-                        ,style: CustomTextStyle.header.copyWith(decoration: TextDecoration.lineThrough),),
-                  ],
-                ));
+                     ],
+                   ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(products[index]['product_attribute']['product_info']['name']
+                            ,style: CustomTextStyle.header),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(products[index]['product_attribute']['product_info']['description']
+                            ,style: CustomTextStyle.subtitle),
+                      ),
+                      Text(products[index]['price'].toString()
+                          ,style: CustomTextStyle.header.copyWith(decoration: TextDecoration.lineThrough),),
+                    ],
+                  )),
+            );
           },),
         ),
-          GestureDetector(
-              onTap:
-              () {
-                getProducts();
-              },
-              child: Text('get product',style: CustomTextStyle.header))
         ],
       ),
     );
