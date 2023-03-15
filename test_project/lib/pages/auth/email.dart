@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:test_project/auth/code.dart';
+import 'package:test_project/pages/auth/code.dart';
 import 'package:test_project/core/constants.dart';
 import 'package:test_project/core/routing.dart';
 import 'package:test_project/core/theme.dart';
 import 'package:http/http.dart' as http;
-import 'package:test_project/widget/button.dart';
+import 'package:test_project/pages/widget/button.dart';
 
 class RegsiterWidget extends StatefulWidget {
   const RegsiterWidget({Key? key}) : super(key: key);

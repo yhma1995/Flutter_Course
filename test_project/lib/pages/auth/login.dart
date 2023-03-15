@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:test_project/core/constants.dart';
 import 'package:test_project/core/routing.dart';
 import 'package:test_project/core/theme.dart';
-import 'package:test_project/widget/button.dart';
+import 'package:test_project/pages/widget/button.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {

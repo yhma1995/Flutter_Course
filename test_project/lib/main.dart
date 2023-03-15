@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:test_project/product/product.dart';
+import 'package:test_project/pages/home.dart';
+import 'package:test_project/pages/product/product.dart';
 
 void main()async{
   await Hive.initFlutter();
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ProductPage(),
+      home: HomeWidget(),
     );
   }
 }
