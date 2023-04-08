@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Routing {
+class CustomRouting {
   static void push(BuildContext context,Widget widget){
     Navigator.push(context,MaterialPageRoute(builder: (context) {
       return widget;

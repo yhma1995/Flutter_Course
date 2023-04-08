@@ -32,7 +32,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     });
   }
 
-  Future<void> getDetailsProduct() async {
+  Future<String> getDetailsProduct() async {
     Map<String, String> header = {'lang': 'en'};
 
     var url = Uri.parse(
@@ -42,6 +42,25 @@ class _ProductDetailsState extends State<ProductDetails> {
     Map response = jsonDecode(res.body);
     print(response);
     product = response['result'];
+    return '';
+  }
+
+
+
+  Widget testFutureBuilder(){
+    return FutureBuilder<String>(
+      future: getDetailsProduct(),
+      builder: (context, snapshot) {
+        if(snapshot.hasError){
+          return Text('err');
+        }else if(snapshot.connectionState==ConnectionState.waiting){
+          return CircularProgressIndicator();
+        }else if(snapshot.hasData){
+          return Text(snapshot.data!);
+        }
+        return SizedBox();
+      },
+    );
   }
 
   @override
@@ -91,7 +110,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               callback: () async {
                 var token = getToken();
                 if (token == null) {
-                  Routing.push(context, LoginPage());
+                  CustomRouting.push(context, LoginPage());
                 } else {
                   setState(() {
                     loading = true;

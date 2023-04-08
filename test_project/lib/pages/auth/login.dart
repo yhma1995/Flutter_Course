@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                 var res=jsonDecode(response.body);
                var hive=Hive.box('shop');
                hive.put('token',res['result']['token']);
-               Routing.back(context);
+               CustomRouting.back(context);
               }
 
             },title: 'Submit',loading: loading,)

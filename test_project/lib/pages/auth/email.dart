@@ -94,7 +94,7 @@ class _RegsiterWidgetState extends State<RegsiterWidget> {
               });
 
               if(response.statusCode==200){
-                Routing.push(context,CodeWidget());
+                CustomRouting.push(context,CodeWidget());
               }
 
             },title: 'Submit',loading: loading,)
